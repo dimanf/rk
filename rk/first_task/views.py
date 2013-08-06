@@ -7,4 +7,4 @@ from django.views.generic import ListView
 
 class Table5List(ListView):
 	model = Table5	
-	queryset = Table5.objects.values('date','ip1','ip2').annotate(sum_bytes=Sum('byte')).order_by('date')
+	queryset = Table5.objects.values('ip1', 'ip2',).annotate(sum_bytes=Sum('byte')).order_by('-date')

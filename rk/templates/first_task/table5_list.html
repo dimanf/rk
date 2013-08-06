@@ -1,10 +1,9 @@
+<h2>Сумма по байтам и сортировка по дате.</h2>
 {% for item in object_list %}
-	<p>{{ item.id }}</p>
-    <p>{{ item.date }}</p>
-    <p>{{ item.time }}</p>
-    <p>{{ item.ip1 }}</p>
-    <p>{{ item.ip2 }}</p>
-    <p>{{ item.byte }}</p>
-    <p>{{ item.sum_bytes }}</p>
+    <p>ip: {{ item.ip1 }}</p>
+    <p>ip: {{ item.ip2 }}</p>
+    <p>Сумма по байтам: <b>{{ item.sum_bytes }}</b> байт.</p>
     <hr>
+{% empty %}
+	Нет данных.
 {% endfor %}

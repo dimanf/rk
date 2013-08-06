@@ -10,31 +10,37 @@
                 }       
             }); 
         });                
-        $('#payments').click(function(){
-            $.getJSON('/json_list/', function(json){                
-                for(var i=0; i<json.data[0].payment_list.length; i++)                
-                    $("#payments_list").append(
-                        "<li>"+"id: "+json.data[0].payment_list[i].id+
-                               ", number: "+json.data[0].payment_list[i].number+
-                               ", date: "+json.data[0].payment_list[i].date+
-                               ", sum: "+json.data[0].payment_list[i].sum+"</li>"); 
-            }); 
+        
+        $.getJSON('/json_list/', function(json){                
+            for(var i=0; i<json.data[0].payment_list.length; i++)                
+                $("#payments_list").append(
+                    "<li>"+"id: "+json.data[0].payment_list[i].id+
+                           ", number: "+json.data[0].payment_list[i].number+
+                           ", date: "+json.data[0].payment_list[i].date+
+                           ", sum: "+json.data[0].payment_list[i].sum+"</li>"); 
+        });        
+        
+        $.getJSON('/json_list/', function(json){ 
+            for(var i=0; i<json.data[0].charge_list.length; i++)                
+                $("#balance_list").append(
+                    "<li>"+"id: "+json.data[0].charge_list[i].id+
+                           ", number: "+json.data[0].charge_list[i].number+
+                           ", date: "+json.data[0].charge_list[i].date+
+                           ", sum: "+json.data[0].charge_list[i].sum+"</li>");                                      
         });
-        $('#balance').click(function(){
-            $.getJSON('/json_list/', function(json){ 
-                for(var i=0; i<json.data[0].charge_list.length; i++)                
-                    $("#balance_list").append(
-                        "<li>"+"id: "+json.data[0].charge_list[i].id+
-                               ", number: "+json.data[0].charge_list[i].number+
-                               ", date: "+json.data[0].charge_list[i].date+
-                               ", sum: "+json.data[0].charge_list[i].sum+"</li>");                                      
-            }); 
+
+        $("#payments").click(function(){
+          $("#payments_list").fadeToggle();
+        });
+
+        $("#balance").click(function(){
+          $("#balance_list").fadeToggle();
         });
     });
 </script>
 
 <ul id="pa_balance"></ul>
 <p><a id="payments" href="#">Платежи</a></p>
-<u id="payments_list"></u>
+<ul id="payments_list" style="display: none;"></ul>
 <p><a id="balance" href="#">Счета</a></p>
-<u id="balance_list"></u>
+<ul id="balance_list" style="display: none;"></ul>
