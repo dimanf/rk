@@ -1,0 +1,40 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+<script type = "text/javascript">
+    $(document).ready(function(){                                                
+        $.getJSON('/json_list/', function(json){                
+            $.each(json, function(key, value){ 
+                if (value[0].pa != undefined) {                      
+                    $("#pa_balance").append("<li>"+"payment = "+value[0].pa+"</li>")
+                       .append("<li>"+"balance = "+value[0].balance+"</li>"); 
+                }       
+            }); 
+        });                
+        $('#payments').click(function(){
+            $.getJSON('/json_list/', function(json){                
+                for(var i=0; i<json.data[0].payment_list.length; i++)                
+                    $("#payments_list").append(
+                        "<li>"+"id: "+json.data[0].payment_list[i].id+
+                               ", number: "+json.data[0].payment_list[i].number+
+                               ", date: "+json.data[0].payment_list[i].date+
+                               ", sum: "+json.data[0].payment_list[i].sum+"</li>"); 
+            }); 
+        });
+        $('#balance').click(function(){
+            $.getJSON('/json_list/', function(json){ 
+                for(var i=0; i<json.data[0].charge_list.length; i++)                
+                    $("#balance_list").append(
+                        "<li>"+"id: "+json.data[0].charge_list[i].id+
+                               ", number: "+json.data[0].charge_list[i].number+
+                               ", date: "+json.data[0].charge_list[i].date+
+                               ", sum: "+json.data[0].charge_list[i].sum+"</li>");                                      
+            }); 
+        });
+    });
+</script>
+
+<ul id="pa_balance"></ul>
+<p><a id="payments" href="#">Платежи</a></p>
+<u id="payments_list"></u>
+<p><a id="balance" href="#">Счета</a></p>
+<u id="balance_list"></u>
